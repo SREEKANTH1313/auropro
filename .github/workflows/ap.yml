@@ -17,7 +17,8 @@ jobs:
          uses: easingthemes/ssh-deploy@main
          env:
            SSH_PRIVATE_KEY: SHA256:mXX6+xN28UO2W1pnuAT7tL2bjdwnLhef0qMUt1QSU7k sreekanth a@APSS-LAP-41
+           run: chmod 400 AP.pem
            REMOTE_HOST: ec2-35-89-75-182.us-west-2.compute.amazonaws.com
            REMOTE_USER: ec2-user
-           run: chmod 400 AP.pem
+         
    
