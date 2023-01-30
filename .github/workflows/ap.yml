@@ -14,21 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-      - name: Configuring AWS credentials
-
-      
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-         aws-region: us-east-1
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-      - name: Deploy Docker Image to EC2
-        uses: appleboy/ssh-action@master
-        with:
-         host: ${{ env.PUBLIC_SSH_KEY }}
-         username: ec2-user
-         key: ${{ env.PRIVATE_SSH_KEY }}
-         run:
-           touch saii
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: SHA256:mXX6+xN28UO2W1pnuAT7tL2bjdwnLhef0qMUt1QSU7k sreekanth a@APSS-LAP-41
+          SOURCE: "./"
+          REMOTE_HOST: "ec2-35-89-75-182.us-west-2.compute.amazonaws.com"
+          REMOTE_USER: "ec2-user"
