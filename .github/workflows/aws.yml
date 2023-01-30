@@ -1,0 +1,42 @@
+name: Deploy to Amazon ECSs
+
+on: workflow_dispatch
+ 
+  
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{secrets.AWS_ACCESS_KEY}}
+        aws-secret-access-key: ${{secrets.AWS_SECRETE_KEY}}
+        aws-region: us-west-2
+        
+    - name: Now We Intializing terraform
+      run: terraform init
+    - name: plan
+      run: terraform plan
+    - name: Building terraform
+      run: terraform apply -auto-approve
+    - name: Login to Amazon ECR
+      id: Login-ECR
+      uses: aws-actions/amazon-ecr-login@v1
+    - name: Build
+      run: docker build -t terraform .
+    - name: Tag
+      run: docker tag terraform:latest 129345365297.dkr.ecr.us-east-1.amazonaws.com/terraform:latest
+    - name: Push
+      run: docker push 129345365297.dkr.ecr.us-east-1.amazonaws.com/terraform:latest  
+    - name: Pull
+      run: docker pull 129345365297.dkr.ecr.us-east-1.amazonaws.com/terraform:latest  
