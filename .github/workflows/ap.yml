@@ -13,20 +13,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-        - name: check
-          uses: actions/checkout@v3
-        - name: dir
-          run: mkdir sai
-        - name: add
-          run: sudo mv AP.pem sai
-        - name: change
-          run: cd sai
-        - name: ssh key
-          run: ssh -i "AP.pem" ec2-user@ec2-35-89-75-182.us-west-2.compute.amazonaws.com
-#       - name: Checkout
-#         uses: easingthemes/ssh-deploy@v2.1.5
-#         env:
-#           SSH_PRIVATE_KEY: SHA256:mXX6+xN28UO2W1pnuAT7tL2bjdwnLhef0qMUt1QSU7k sreekanth a@APSS-LAP-41
-#           SOURCE: "./"
-#           REMOTE_HOST: "ec2-35-89-75-182.us-west-2.compute.amazonaws.com"
-#           REMOTE_USER: "ec2-user"
+       - name: Checkout
+         uses: easingthemes/ssh-deploy@v2.1.5
+         env:
+           SSH_PRIVATE_KEY: SHA256:mXX6+xN28UO2W1pnuAT7tL2bjdwnLhef0qMUt1QSU7k sreekanth a@APSS-LAP-41
+           SOURCE: "./"
+           REMOTE_HOST: "ec2-35-89-75-182.us-west-2.compute.amazonaws.com"
+           REMOTE_USER: "ec2-user"
