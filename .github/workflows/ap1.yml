@@ -9,10 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-      - uses: actions/checkout@v3
-      - name: Configuring AWS credentials
-      - uses: actions/checkout@v2
       - name: Login ec2
         env:
           PRIVATE_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
