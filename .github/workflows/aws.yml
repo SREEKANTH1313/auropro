@@ -26,10 +26,10 @@ jobs:
       id: Login-ECR
       uses: aws-actions/amazon-ecr-login@v1
     - name: Build
-      run: docker build -t terraform .
+      run: docker build -t auropro .
     - name: Tag
-      run: docker tag terraform:latest 129345365297.dkr.ecr.us-east-1.amazonaws.com/terraform:latest
+      run: docker tag auropro:latest 129345365297.dkr.ecr.us-west-2.amazonaws.com/auropro:latest
     - name: Push
-      run: docker push 129345365297.dkr.ecr.us-east-1.amazonaws.com/terraform:latest  
+      run: docker push 129345365297.dkr.ecr.us-west-2.amazonaws.com/auropro:latest 
     - name: Pull
-      run: docker pull 129345365297.dkr.ecr.us-east-1.amazonaws.com/terraform:latest  
+      run: ddocker pull 129345365297.dkr.ecr.us-west-2.amazonaws.com/auropro:latest 
