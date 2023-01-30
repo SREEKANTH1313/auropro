@@ -4,8 +4,6 @@ env:
   AWS_ACCESS_KEY_ID: AKIAR4HMVUUY364IJVWL
   AWS_SECRET_ACCESS_KEY: YGpouFiUYoBasx76enGq6RWb7/zJAsRxrsYBkoi1
   AWS_DEFAULT_REGION: us-west-2
-#   PUBLIC_SSH_KEY: ${{ secrets.AWS_SSH_KEY_PUBLIC }}
-#   IMAGE_TAG: sample_image
 
 jobs:
   build:
@@ -22,37 +20,11 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
-#       - name: Build, tag, and push image to Amazon ECR
-#         env:
-#           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-#           ECR_REPOSITORY: githubactions
-#           IMAGE_TAG: sample_image
-#         run: |
-#           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-#           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-#       - name: install-aws-cli
-#         uses: unfor19/install-aws-cli-action@master
-#       - run: aws --version
-#         shell: bash
-#       - name: Set up Terraform
-#         uses: hashicorp/setup-terraform@v1
-#         with: 
-#          version: v1.3.7 
-#       - name: Terraform Init
-#         id: init
-#         run: terraform init
-      
-#       - name: Terraform Plan
-#         id: plan
-#         run: terraform plan
-      
-#       - name: Terraform apply
-#         id: apply
-#         run: terraform apply --auto-approve 
+
       - name: Deploy to my EC2 instance
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          SSH_PRIVATE_KEY: ssh -i "AP.pem" ec2-user@ec2-35-89-75-182.us-west-2.compute.amazonaws.com
           SOURCE: "./"
           REMOTE_HOST: "ec2-35-89-75-182.us-west-2.compute.amazonaws.com"
           REMOTE_USER: "ec2-user"
