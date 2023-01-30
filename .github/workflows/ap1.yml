@@ -12,23 +12,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Configuring AWS credentials
-
-      
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-         aws-region: us-west-2
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-
-      - name: Deploy to my EC2 instance
-        uses: easingthemes/ssh-deploy@v2.1.5
+      - uses: actions/checkout@v2
+      - name: Login ec2
         env:
-          SSH_PRIVATE_KEY: ssh -i "AP.pem" ec2-user@ec2-35-89-75-182.us-west-2.compute.amazonaws.com
-          SOURCE: "./"
-          run: chmod 400 AP.pem
-          REMOTE_HOST: "ec2-35-89-75-182.us-west-2.compute.amazonaws.com"
-          REMOTE_USER: "ec2-user"
-      - name: craeting file
+          PRIVATE_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+          HOSTNAME: ec2-35-89-75-182.us-west-2.compute.amazonaws.com
+          USER_NAME: ec2-user
+      - name: fiile
         run: touch sai
         
