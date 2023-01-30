@@ -18,7 +18,7 @@ jobs:
         - name: dir
           run: mkdir sai
         - name: add
-          run: sudo mv ap.pem sai
+          run: sudo mv AP.pem sai
         - name: change
           run: cd sai
         - name: ssh key
