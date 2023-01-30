@@ -13,6 +13,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+        - name: dir
+          run: mkdir sai
+        - name: add
+          run: sudo mv ap.pem sai
         - name: pem file
           run: chmod 400 ap.pem
         - name: ssh key
