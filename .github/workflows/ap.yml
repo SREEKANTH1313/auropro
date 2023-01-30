@@ -9,11 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to my EC2 instance
-        uses: easingthemes/ssh-deploy@v2.1.5
+      - uses: actions/checkout@v2
+      - name: Login ec2
         env:
-          SSH_PRIVATE_KEY: SHA256:mXX6+xN28UO2W1pnuAT7tL2bjdwnLhef0qMUt1QSU7k sreekanth a@APSS-LAP-41
-          REMOTE_HOST: "ec2-35-89-75-182.us-west-2.compute.amazonaws.com"
-          REMOTE_USER: "ec2-user"
-      - name: creating a file
-        run: touch sai
+          PRIVATE_KEY: SHA256:mXX6+xN28UO2W1pnuAT7tL2bjdwnLhef0qMUt1QSU7k sreekanth a@APSS-LAP-41
+          HOSTNAME: ec2-35-89-75-182.us-west-2.compute.amazonaws.com
+          USER_NAME: ec2-user
