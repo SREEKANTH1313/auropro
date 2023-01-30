@@ -31,4 +31,4 @@ jobs:
          username: ec2-user
          key: ${{ env.PRIVATE_SSH_KEY }}
          run:
-           touch sai
+           touch saii
