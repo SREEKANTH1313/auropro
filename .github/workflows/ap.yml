@@ -13,6 +13,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+        - name: check
+          uses: actions/checkout@v3
         - name: dir
           run: mkdir sai
         - name: add
