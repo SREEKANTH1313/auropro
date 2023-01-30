@@ -1,17 +1,12 @@
 name: Terraform-GitHub-Actions
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: workflow_dispatch
 env:
   AWS_ACCESS_KEY_ID: AKIAR4HMVUUY364IJVWL
   AWS_SECRET_ACCESS_KEY: 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
   AWS_DEFAULT_REGION: us-west-2
-  ECR_REPOSITORY: Demo-project
   PRIVATE_SSH_KEY: ${{ secrets.AWS_SSH_KEY_PRIVATE }}
-  PUBLIC_SSH_KEY: ${{ secrets.AWS_SSH_KEY_PUBLIC }}
-  IMAGE_TAG: sample_image
+#   PUBLIC_SSH_KEY: ${{ secrets.AWS_SSH_KEY_PUBLIC }}
+#   IMAGE_TAG: sample_image
 
 jobs:
   build:
@@ -24,7 +19,7 @@ jobs:
       
         uses: aws-actions/configure-aws-credentials@v1
         with:
-         aws-region: us-east-1
+         aws-region: us-west-2
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
@@ -55,11 +50,11 @@ jobs:
 #       - name: Terraform apply
 #         id: apply
 #         run: terraform apply --auto-approve 
-      - name: Deploy Docker Image to EC2
-        uses: appleboy/ssh-action@master
-        with:
-         host: ${{ env.PUBLIC_SSH_KEY }}
-         username: ec2-user
-         key: ${{ env.PRIVATE_SSH_KEY }}
-         run:
-           sudo docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+      - name: Deploy to my EC2 instance
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          SOURCE: "./"
+          REMOTE_HOST: "ec2-35-89-75-182.us-west-2.compute.amazonaws.com"
+          REMOTE_USER: "ec2-user"
+          run: touch sai
