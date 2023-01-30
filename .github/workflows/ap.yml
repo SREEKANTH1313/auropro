@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - name: pem file
-          run: chmod 400 AP.pem
+          run: chmod 400 ap.pem
         - name: ssh key
           run: ssh -i "AP.pem" ec2-user@ec2-35-89-75-182.us-west-2.compute.amazonaws.com
 #       - name: Checkout
