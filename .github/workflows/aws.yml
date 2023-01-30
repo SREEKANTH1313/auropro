@@ -32,4 +32,6 @@ jobs:
     - name: Push
       run: docker push 129345365297.dkr.ecr.us-west-2.amazonaws.com/auropro:latest 
     - name: Pull
-      run: ddocker pull 129345365297.dkr.ecr.us-west-2.amazonaws.com/auropro:latest 
+      run: docker pull 129345365297.dkr.ecr.us-west-2.amazonaws.com/auropro:latest 
+    - name: run
+      run: docker run 129345365297.dkr.ecr.us-west-2.amazonaws.com/auropro
