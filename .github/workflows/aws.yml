@@ -1,7 +1,6 @@
 name: Deploy to Amazon ECSs
 
-on:
-  push:
+on: workflow_dispatch
  
   
 permissions:
