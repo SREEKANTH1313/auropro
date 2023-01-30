@@ -18,6 +18,6 @@ jobs:
           PRIVATE_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
           HOSTNAME: ec2-35-89-75-182.us-west-2.compute.amazonaws.com
           USER_NAME: ec2-user
-      - name: fiile
+      - name: file
         run: touch sai
         
